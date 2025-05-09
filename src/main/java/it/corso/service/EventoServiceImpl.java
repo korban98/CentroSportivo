@@ -1,13 +1,14 @@
 package it.corso.service;
 
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import it.corso.model.Evento;
 import it.corso.repository.EventoRepository;
 
-public class HomeServiceImpl implements HomeService{
+@Service
+public class EventoServiceImpl implements EventoService{
 
     @Autowired
     private EventoRepository eventoRepository;
@@ -19,8 +20,11 @@ public class HomeServiceImpl implements HomeService{
 
     @Override
     public Evento datiEvento(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'datiEvento'");
+        Optional<Evento> libroOptional = eventoRepository.findById(id);
+        if(libroOptional.isPresent()) {
+            return libroOptional.get();
+        }
+        return null;
     }
 
 }
