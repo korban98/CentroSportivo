@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 09, 2025 alle 12:32
+-- Creato il: Mag 09, 2025 alle 14:42
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -62,18 +62,6 @@ CREATE TABLE `evento` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `eventosport`
---
-
-CREATE TABLE `eventosport` (
-  `id` int(11) NOT NULL,
-  `id_sport` int(11) NOT NULL,
-  `id_evento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `indirizzo`
 --
 
@@ -114,14 +102,6 @@ ALTER TABLE `evento`
   ADD KEY `id_sport` (`id_sport`);
 
 --
--- Indici per le tabelle `eventosport`
---
-ALTER TABLE `eventosport`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_sport` (`id_sport`),
-  ADD KEY `id_evento` (`id_evento`);
-
---
 -- Indici per le tabelle `indirizzo`
 --
 ALTER TABLE `indirizzo`
@@ -150,12 +130,6 @@ ALTER TABLE `evento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `eventosport`
---
-ALTER TABLE `eventosport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
@@ -177,13 +151,6 @@ ALTER TABLE `sport`
 ALTER TABLE `evento`
   ADD CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`id_indirizzo`) REFERENCES `indirizzo` (`id`),
   ADD CONSTRAINT `evento_ibfk_2` FOREIGN KEY (`id_sport`) REFERENCES `sport` (`id`);
-
---
--- Limiti per la tabella `eventosport`
---
-ALTER TABLE `eventosport`
-  ADD CONSTRAINT `eventosport_ibfk_1` FOREIGN KEY (`id_sport`) REFERENCES `sport` (`id`),
-  ADD CONSTRAINT `eventosport_ibfk_2` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
