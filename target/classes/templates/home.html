@@ -20,7 +20,7 @@
       <!-- CARD LIBRO -->
       <div th:each="evento : ${eventi}" class="col-lg-3 text-center p-2">
         <img th:src="@{images/no_img.png}" alt="Copertina Evento">
-        <h4 class="text-primary mt-2"><a th:href="@{/dettaglio(id=${evento.id})}" th:text="${libro.titolo}">Titolo Evento</a></h4>
+        <h4 class="text-primary mt-2"><a th:href="@{/dettaglio(id=${evento.id})}" th:text="${evento.nome}">Nome Evento</a></h4>
       </div>
     </div>
 
