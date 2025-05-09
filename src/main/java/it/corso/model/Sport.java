@@ -17,6 +17,6 @@ public class Sport {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String data;
+	private String nome;
 	
 }
