@@ -6,4 +6,6 @@ import it.corso.model.Admin;
 
 public interface AdminRepository extends CrudRepository<Admin, Integer> {
 
+    Admin findByUsername(String username);
+    
 }
