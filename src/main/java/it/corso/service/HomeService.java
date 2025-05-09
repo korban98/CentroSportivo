@@ -6,4 +6,5 @@ import it.corso.model.Evento;
 
 public interface HomeService {
     List<Evento> elencoEventi();
+    Evento datiEvento(Integer id);
 }
