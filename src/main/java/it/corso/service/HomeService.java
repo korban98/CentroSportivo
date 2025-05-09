@@ -1,5 +1,9 @@
 package it.corso.service;
 
-public interface HomeService {
+import java.util.List;
 
+import it.corso.model.Evento;
+
+public interface HomeService {
+    List<Evento> elencoEventi();
 }
