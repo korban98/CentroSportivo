@@ -1,6 +1,6 @@
 package it.corso.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -24,7 +24,7 @@ public class Evento {
     private int id;
     private String foto;
     private String nome;
-    private LocalDate ricezione;
+    private LocalDateTime ricezione;
     private Integer costo;
     private String campo;
     private String descrizione;
