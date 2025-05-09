@@ -10,7 +10,7 @@ public class LoginAdminController {
 
     @GetMapping
     public String renderPagina(){
-        return "";
+        return "loginadmin";
     }
 
 }
