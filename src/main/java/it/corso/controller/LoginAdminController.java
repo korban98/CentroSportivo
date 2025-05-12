@@ -25,7 +25,7 @@ public class LoginAdminController {
         
         return "redirect:/riservata";
     }
-
+    
     @PostMapping
     public String postMethodName(@RequestParam String username, @RequestParam String password, HttpSession session) {
         String esitoControllo = adminService.controlloLogin(username, password, session);
