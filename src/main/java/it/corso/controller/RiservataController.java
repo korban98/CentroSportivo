@@ -1,5 +1,7 @@
 package it.corso.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,10 +61,15 @@ public class RiservataController {
     }
 
     @PostMapping
-    public String salvaEvento(@ModelAttribute Evento evento,@RequestParam(required=false, name="fotoEvento") MultipartFile foto) {
+    public String salvaEvento(@ModelAttribute Evento evento,@RequestParam(required=false, name="fotoEvento") MultipartFile foto, @RequestParam(required=false) String ricezione) {
         evento.setIndirizzo(indirizzoService.getIndirizzo(1));
         Sport sport = sportService.trovaSportById(evento.getSport().getId());
         evento.setSport(sport);
+
+        if(evento.getRicezione() == null){
+            LocalDateTime data = LocalDateTime.parse(ricezione);
+            evento.setRicezione(data);
+        }
 
 
         eventoService.salvaEvento(evento, foto);
