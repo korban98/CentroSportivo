@@ -19,7 +19,7 @@
     <!-- BARRA DI NAVIGAZIONE -->
     <div class="bg-primary p-4 text-center">
       <a th:href="@{/}" class="fs-4 text-white me-4">Home</a>
-      <a th:href="@{/riservata/logout}" class="fs-4 text-white me-4">logout</a>
+      <a th:href="@{/riservata/logout}" th:text="|Logout ${admin.username}|" class="fs-4 text-white me-4">logout</a>
     </div>
 
     <h2 class="text-center mb-4 mt-4">Modifica/Aggiungi Evento</h2>
