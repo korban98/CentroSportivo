@@ -10,6 +10,7 @@ public interface EventoService {
 
     List<Evento> elencoEventi();
     Evento datiEvento(Integer id);
+    List<Evento> elencoEventiFuturi();
     void salvaEvento(Evento evento, MultipartFile foto);
     void eliminaEvento(Integer id);
     

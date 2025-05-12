@@ -35,16 +35,19 @@ public class RiservataController {
     @Autowired
     private SportService sportService;
 
+    private Evento evento;
+
     @GetMapping
-    public String renderPage(HttpSession session, Model model) {
+    public String renderPage(HttpSession session, Model model, @RequestParam(required = false) Integer id) {
         if (session.getAttribute("admin") == null) {
             return "redirect:/loginadmin";
         }
         Admin adminSession = (Admin) session.getAttribute("admin");
         Admin admin = adminService.datiAdmin(adminSession.getId());
+        evento = id == null ? new Evento() : eventoService.datiEvento(id);
         model.addAttribute("admin", admin);
         model.addAttribute("eventi", eventoService.elencoEventi());
-        model.addAttribute("evento", new Evento()); // da modificare
+        model.addAttribute("evento", evento); 
         model.addAttribute("sportList", sportService.elencoSport());
         return "riservata";
     }

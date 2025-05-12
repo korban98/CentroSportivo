@@ -19,9 +19,10 @@
     <div class="row mt-4 justify-content-center">
       <!-- CARD LIBRO -->
       <div th:each="evento : ${eventi}" class="col-lg-3 text-center p-2">
-        <img th:if="${evento.foto != null && evento.foto != ''}" th:src="@{${evento.foto}}" alt="Copertina Evento">
-        <img th:if="${evento.foto == null || evento.foto == ''}" th:src="@{images/no_img.png}" alt="Copertina Evento">
-        <h4 class="text-primary mt-2"><a th:href="@{/dettaglio(id=${evento.id})}" th:text="${evento.nome}">Nome Evento</a></h4>
+        <div th:if="${evento.ricezione} ">
+          <img th:src="@{${evento.foto == null || evento.foto == '' ? 'images/no_img.png' : evento.foto}}" alt="Copertina Evento">
+          <h4 class="text-primary mt-2"><a th:href="@{/dettaglio(id=${evento.id})}" th:text="${evento.nome}">Nome Evento</a></h4>
+        </div>
       </div>
     </div>
 

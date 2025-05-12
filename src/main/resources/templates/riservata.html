@@ -31,9 +31,10 @@
           <input type="hidden" class="form-control" th:field="*{id}" required>
           <input type="hidden" class="form-control" th:field="*{indirizzo}" required>
           <input type="hidden" class="form-control" th:field="*{foto}">
+          <input type="hidden" class="form-control" th:if="${readonly}" th:field="*{ricezione}">
           <label for="data" class="form-label">Data evento</label>
-          <input type="datetime-local" class="form-control"
-            th:field="*{ricezione}" required>
+          <input type="datetime-local" class="form-control" 
+            th:field="*{ricezione}" th:unless="${readonly}">
         </div>
 
         <div class="col-md-4">
@@ -109,7 +110,7 @@
             <img alt="foto evento" width="60" class="img-thumbnail">
           </td>
           <td>
-            <a th:href="@{/}" class="btn btn-sm btn-primary">Modifica</a>
+            <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-primary">Modifica</a>
             <a th:href="@{/riservata/rimuovi(id=${evento.id})}" class="btn btn-sm btn-danger">Rimuovi</a>
           </td>
         </tr>

@@ -1,6 +1,7 @@
 package it.corso.service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,12 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public List<Evento> elencoEventi() {
         return (List<Evento>) eventoRepository.findAll();
+    }
+
+    @Override
+    public List<Evento> elencoEventiFuturi() {
+        LocalDateTime now = LocalDateTime.now();
+        return (List<Evento>) eventoRepository.findByRicezioneAfter(now);
     }
 
     @Override
