@@ -108,7 +108,7 @@
           <td th:text="${evento.campo}">Campo A</td>
           <td th:text="${evento.partecipanti}">12</td>
           <td>
-            <img alt="foto evento" width="60" class="img-thumbnail">
+            <img alt="foto evento" width="60" class="img-thumbnail" th:src="${evento.foto}">
           </td>
           <td>
             <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-primary">Modifica</a>
