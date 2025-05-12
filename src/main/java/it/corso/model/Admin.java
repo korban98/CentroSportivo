@@ -22,7 +22,6 @@ public class Admin {
     @Pattern(regexp = "[a-zA-Z0-9._-]{1,50}", message = "Caratteri non ammessi in username")
     private String username;
 
-    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,50}", message = "Caratteri non ammessi in password")
     private String psw;
 
 }
