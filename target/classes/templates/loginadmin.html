@@ -20,9 +20,11 @@
     <div class="row mt-4 justify-content-center">
       <div class="col-lg-4 p-4 border">
         <h4 class="text-center">Login Amministratore</h4>
-        <h5 th:if="${errore != null}" th:text="${errore}" class="text-center text-danger"></h5>
-        <form action="/loginadmin" method="post">
+        <h5 th:if="${esito != null}" th:text="${esito}" class="text-center text-danger"></h5>
+        <form id="form" action="/loginadmin" method="post">
+          <input type="hidden" name="id">
           <input type="text" name="username" placeholder="Username" class="form-control mt-3" required>
+          <small id="username-error" class="text-danger" style="display: none;">Username non valido: solo lettere, numeri, punto, trattino e underscore.</small>
           <input type="password" name="password" placeholder="Password" class="form-control mt-3" required>
           <div class="text-center mt-4">
             <input type="submit" value="Accesso Area Riservata" class="btn btn-success">
@@ -30,6 +32,25 @@
         </form>
       </div>
     </div>
+
+    <script>
+      const form = document.getElementById("form");
+      const regex = /^[a-zA-Z0-9._-]{1,50}$/;
+      const errorMsg = document.getElementById("username-error");
+      inputValido = form.elements.id.value ? true : false;
+
+      form.elements.username.addEventListener("input", function() {
+        if(regex.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+          errorMsg.style.display = "none";
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+          errorMsg.style.display = "block";
+        }
+    });
+    </script>
 
   </div>
 </body>
