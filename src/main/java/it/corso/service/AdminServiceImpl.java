@@ -1,5 +1,8 @@
 package it.corso.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +38,15 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public Admin datiAdmin(String username) {
         return adminRepository.findByUsername(username);
+    }
+
+    @Override
+    public String validazioneCampi(String username) {
+        if(!username.matches("[a-zA-Z0-9._-]{1,50}")) {
+            return "Caratteri non ammessi in Username";
+        }
+        
+        return null;
     }
 
 }

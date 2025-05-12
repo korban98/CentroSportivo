@@ -8,5 +8,6 @@ public interface AdminService {
     Admin datiAdmin(Integer id);
     String controlloLogin(String username, String password, HttpSession session);
     Admin datiAdmin(String username);
+    String validazioneCampi(String username);
 
 }
