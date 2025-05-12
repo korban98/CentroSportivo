@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.corso.model.Admin;
 import it.corso.model.Evento;
+import it.corso.model.Sport;
 import it.corso.service.AdminService;
 import it.corso.service.EventoService;
 import it.corso.service.IndirizzoService;
@@ -42,6 +45,7 @@ public class RiservataController {
         model.addAttribute("admin", admin);
         model.addAttribute("eventi", eventoService.elencoEventi());
         model.addAttribute("evento", new Evento()); // da modificare
+        model.addAttribute("sportList", sportService.elencoSport());
         return "riservata";
     }
 
@@ -52,11 +56,13 @@ public class RiservataController {
     }
 
     @PostMapping
-    public String salvaEvento(@ModelAttribute Evento evento) {
+    public String salvaEvento(@ModelAttribute Evento evento,@RequestParam(required=false, name="fotoEvento") MultipartFile foto) {
         evento.setIndirizzo(indirizzoService.getIndirizzo(1));
-        evento.setSport(sportService.trovaSport(evento.getSport().getNome()));
+        Sport sport = sportService.trovaSportById(evento.getSport().getId());
+        evento.setSport(sport);
 
-        eventoService.salvaEvento(evento);
+
+        eventoService.salvaEvento(evento, foto);
         return "redirect:/riservata";
     }
 

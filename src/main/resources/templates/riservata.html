@@ -30,6 +30,7 @@
         <div class="col-md-4">
           <input type="hidden" class="form-control" th:field="*{id}" required>
           <input type="hidden" class="form-control" th:field="*{indirizzo}" required>
+          <input type="hidden" class="form-control" th:field="*{foto}">
           <label for="data" class="form-label">Data evento</label>
           <input type="datetime-local" class="form-control"
             th:field="*{ricezione}" required>
@@ -42,7 +43,7 @@
 
         <div class="col-md-4">
           <label for="foto" class="form-label">Foto evento</label>
-          <input type="text" class="form-control" accept="image/*" th:field="*{foto}" required>
+          <input type="file" class="form-control" name="fotoEvento">
         </div>
 
         <div class="col-md-6">
@@ -67,10 +68,9 @@
 
         <div class="col-md-4">
           <label for="sport" class="form-label">Sport</label>
-          <select class="form-select" th:field="*{sport.nome}" required>
+          <select class="form-select" th:field="*{sport}" required>
             <option value="" disabled selected>-- Seleziona uno sport --</option>
-            <option value="Calcio">Calcio</option>
-            <option value="Basket">Basket</option>
+            <option th:each="sport : ${sportList}" th:value="${sport.id}" th:text="${sport.nome}"></option>
           </select>
         </div>
 
