@@ -26,4 +26,9 @@ public class AdminServiceImpl implements AdminService{
 
     }
 
+    @Override
+    public Admin datiAdmin(Integer id) {
+        return adminRepository.findById(id).get();
+    }
+
 }
