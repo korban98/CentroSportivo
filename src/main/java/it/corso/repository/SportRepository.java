@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import it.corso.model.Sport;
 
 public interface SportRepository extends CrudRepository<Sport, Integer>{
-
+    Sport findByNome(String nome);
 }

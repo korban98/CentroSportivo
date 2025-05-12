@@ -2,8 +2,10 @@ package it.corso.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import it.corso.model.Evento;
 import it.corso.repository.EventoRepository;
 
@@ -25,6 +27,16 @@ public class EventoServiceImpl implements EventoService{
             return libroOptional.get();
         }
         return null;
+    }
+
+    @Override
+    public void salvaEvento(Evento evento) {
+        eventoRepository.save(evento);
+    }
+
+    @Override
+    public void eliminaEvento(Integer id) {
+        eventoRepository.deleteById(id);
     }
 
 }
