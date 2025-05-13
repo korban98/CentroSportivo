@@ -13,7 +13,7 @@ import it.corso.service.EventoService;
 
 //localhost:8080/
 @Controller
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
 
     @Autowired

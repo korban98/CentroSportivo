@@ -21,7 +21,7 @@ public class DettaglioController {
     public String renderPage(@RequestParam(defaultValue = "0") Integer id, Model model) {
         Evento evento = eventoService.datiEvento(id);
 
-        if(evento == null) return "redirect:/";
+        if(evento == null) return "redirect:/home";
 
         model.addAttribute("evento", evento);
         

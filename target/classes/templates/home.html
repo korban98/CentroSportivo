@@ -119,6 +119,22 @@
       text-decoration: underline;
     }
 
+    .icon-bounce {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+    .navbar-brand:hover .icon-bounce {
+      animation: bounce 0.4s ease;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-8px); }
+      60% { transform: translateY(4px); }
+      100% { transform: translateY(0); }
+    }
+
     /* Media Queries per schermi piccoli */
     @media (max-width: 576px) {
       .card-body {
@@ -131,23 +147,26 @@
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-    <div class="container-fluid">
+    <div class="container-fluid d-flex justify-content-between align-items-center w-100">
       <a class="navbar-brand fs-4" th:href="@{/}">
-        <span class="material-symbols-outlined">location_on</span>
+        <span class="material-symbols-outlined icon-bounce">location_on</span>
         Centro Sportivo
       </a>
-      <div class="collapse navbar-collapse justify-content-end">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="admin-link nav-link" th:href="@{/loginadmin}">
-              <span class="material-symbols-outlined">lock</span>
-              admin
-            </a>
-          </li>
-        </ul>
+      <div class="mx-auto">
+        <a class="nav-link text-white fw-semibold" th:href="@{/home}">
+          <span class="material-symbols-outlined">event</span>
+          Eventi
+        </a>
+      </div>
+      <div>
+        <a class="admin-link nav-link" th:href="@{/riservata}">
+            <span class="material-symbols-outlined">lock</span>
+            admin
+        </a>
       </div>
     </div>
   </nav>
+
 
   <!-- CONTENUTO PRINCIPALE -->
   <div class="container mt-5">
