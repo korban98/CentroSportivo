@@ -10,17 +10,95 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
     crossorigin="anonymous"></script>
+  <!-- Google Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #f4f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 100px;
+    }
+
+    .navbar-custom {
+      background-color: #1A1A1A;
+      border-bottom: 3px solid #FF6F61;
+      padding: 1rem 1.5rem;
+      min-height: 80px;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #FF6F61 !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-brand .material-symbols-outlined {
+      font-size: 28px;
+    }
+
+    .navbar-nav .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .admin-link {
+      color: #FFF !important;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .admin-link:hover {
+      color: #FF6F61 !important;
+    }
+
+    .admin-link .material-symbols-outlined {
+      font-size: 28px;
+      margin-bottom: 0.25rem;
+    }
+  </style>
 </head>
+
 
 <body>
 
-  <div class="container">
 
-    <!-- BARRA DI NAVIGAZIONE -->
-    <div class="bg-primary p-4 text-center">
-      <a th:href="@{/}" class="fs-4 text-white me-4">Home</a>
-      <a th:href="@{/riservata/logout}" th:text="|Logout ${admin.username}|" class="fs-4 text-white me-4">logout</a>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-4" th:href="@{/}">
+        <span class="material-symbols-outlined">location_on</span>
+        Centro Sportivo
+      </a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="admin-link nav-link" th:href="@{/riservata/logout}">
+              <span class="material-symbols-outlined">logout</span>
+              <span th:text="|Logout ${admin.username}|">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
+
+
+
+  <div class="container">
 
     <h2 class="text-center mb-4 mt-4">Modifica/Aggiungi Evento</h2>
 
@@ -40,8 +118,10 @@
 
         <div class="col-md-4">
           <label for="name" class="form-label">Nome evento</label>
-          <input type="text" name="nome" class="form-control" placeholder="max 50 caratteri" th:field="*{nome}" required>
-          <small th:if="${errori != null && errori.containsKey('nome')}" th:text="${errori.get('nome')}" class="text-danger"></small>
+          <input type="text" name="nome" class="form-control" placeholder="max 50 caratteri" th:field="*{nome}"
+            required>
+          <small th:if="${errori != null && errori.containsKey('nome')}" th:text="${errori.get('nome')}"
+            class="text-danger"></small>
         </div>
 
         <div class="col-md-4">
@@ -51,26 +131,33 @@
 
         <div class="col-md-6">
           <label for="descrizione" class="form-label">Descrizione</label>
-          <input type="text" name="descrizione" class="form-control" placeholder="max 255 caratteri" th:field="*{descrizione}" required>
-          <small th:if="${errori != null && errori.containsKey('descrizione')}" th:text="${errori.get('descrizione')}" class="text-danger"></small>
+          <input type="text" name="descrizione" class="form-control" placeholder="max 255 caratteri"
+            th:field="*{descrizione}" required>
+          <small th:if="${errori != null && errori.containsKey('descrizione')}" th:text="${errori.get('descrizione')}"
+            class="text-danger"></small>
         </div>
 
         <div class="col-md-3">
           <label for="costo" class="form-label">Costo entrata (€)</label>
           <input type="number" name="costo" step="0.01" min="0.01" class="form-control" th:field="*{costo}" required>
-          <small th:if="${errori != null && errori.containsKey('costo')}" th:text="${errori.get('costo')}" class="text-danger"></small>
+          <small th:if="${errori != null && errori.containsKey('costo')}" th:text="${errori.get('costo')}"
+            class="text-danger"></small>
         </div>
 
         <div class="col-md-3">
           <label for="campo" class="form-label">Campo</label>
-          <input type="text" name="campo" class="form-control" placeholder="max 10 caratteri" th:field="*{campo}" required>
-          <small th:if="${errori != null && errori.containsKey('campo')}" th:text="${errori.get('campo')}" class="text-danger"></small>
+          <input type="text" name="campo" class="form-control" placeholder="max 10 caratteri" th:field="*{campo}"
+            required>
+          <small th:if="${errori != null && errori.containsKey('campo')}" th:text="${errori.get('campo')}"
+            class="text-danger"></small>
         </div>
 
         <div class="col-md-4">
           <label for="partecipanti" class="form-label">Numero partecipanti</label>
-          <input type="number" name="partecipanti" step="1" min="1" class="form-control" th:field="*{partecipanti}" required>
-          <small th:if="${errori != null && errori.containsKey('partecipanti')}" th:text="${errori.get('partecipanti')}" class="text-danger"></small>
+          <input type="number" name="partecipanti" step="1" min="1" class="form-control" th:field="*{partecipanti}"
+            required>
+          <small th:if="${errori != null && errori.containsKey('partecipanti')}" th:text="${errori.get('partecipanti')}"
+            class="text-danger"></small>
         </div>
 
         <div class="col-md-4">
@@ -131,8 +218,8 @@
 
       inputValido = form.elements.id.value ? true : false;
 
-      form.elements.nome.addEventListener("input", function() {
-        if(regex_nome.test(this.value)) {
+      form.elements.nome.addEventListener("input", function () {
+        if (regex_nome.test(this.value)) {
           this.style.borderColor = "";
           inputValido = true;
         } else {
@@ -140,8 +227,8 @@
           inputValido = false;
         }
       });
-      form.elements.descrizione.addEventListener("input", function() {
-        if(regex_descrizione.test(this.value)) {
+      form.elements.descrizione.addEventListener("input", function () {
+        if (regex_descrizione.test(this.value)) {
           this.style.borderColor = "";
           inputValido = true;
         } else {
@@ -149,8 +236,8 @@
           inputValido = false;
         }
       });
-      form.elements.campo.addEventListener("input", function() {
-        if(regex_campo.test(this.value)) {
+      form.elements.campo.addEventListener("input", function () {
+        if (regex_campo.test(this.value)) {
           this.style.borderColor = "";
           inputValido = true;
         } else {
