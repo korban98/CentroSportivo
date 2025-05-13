@@ -1,6 +1,7 @@
 package it.corso.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,5 +14,6 @@ public interface EventoService {
     List<Evento> elencoEventiFuturi();
     void salvaEvento(Evento evento, MultipartFile foto);
     void eliminaEvento(Integer id);
+    Map<String, String> validazioneCampi(String nome, String descrizione, Double costo, String campo, Integer nPartecipanti);
     
 }

@@ -1,6 +1,7 @@
 package it.corso.controller;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,8 @@ public class RiservataController {
 
     private Evento evento;
 
+    private Map<String, String> errori = null;
+
     @GetMapping
     public String renderPage(HttpSession session, Model model, @RequestParam(required = false) Integer id) {
         if (session.getAttribute("admin") == null) {
@@ -46,11 +49,12 @@ public class RiservataController {
         }
         Admin adminSession = (Admin) session.getAttribute("admin");
         Admin admin = adminService.datiAdmin(adminSession.getId());
-        evento = id == null ? new Evento() : eventoService.datiEvento(id);
+        if(errori == null) evento = id == null ? new Evento() : eventoService.datiEvento(id);
         model.addAttribute("admin", admin);
         model.addAttribute("eventi", eventoService.elencoEventi());
         model.addAttribute("evento", evento); 
         model.addAttribute("sportList", sportService.elencoSport());
+        model.addAttribute("errori", errori);
         return "riservata";
     }
 
@@ -61,7 +65,7 @@ public class RiservataController {
     }
 
     @PostMapping
-    public String salvaEvento(@ModelAttribute Evento evento,@RequestParam(required=false, name="fotoEvento") MultipartFile foto, @RequestParam(required=false) String ricezione) {
+    public String salvaEvento(@ModelAttribute Evento evento,@RequestParam(required=false, name="fotoEvento") MultipartFile foto, @RequestParam(required=false) String ricezione, @RequestParam String nome, @RequestParam String descrizione, @RequestParam Double costo, @RequestParam String campo, @RequestParam Integer partecipanti) {
         evento.setIndirizzo(indirizzoService.getIndirizzo(1));
         Sport sport = sportService.trovaSportById(evento.getSport().getId());
         evento.setSport(sport);
@@ -71,8 +75,14 @@ public class RiservataController {
             evento.setRicezione(data);
         }
 
+        Map<String, String> esitoValidazione = eventoService.validazioneCampi(nome, descrizione, costo, campo, partecipanti);
+        if(esitoValidazione != null) {
+            errori = esitoValidazione;
+            return "redirect:/riservata";
+        }
 
         eventoService.salvaEvento(evento, foto);
+        errori = null;
         return "redirect:/riservata";
     }
 

@@ -10,6 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,11 +26,22 @@ public class Evento {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String foto;
+
+    @Pattern(regexp = "[a-zA-Z0-9\\s-]{1,50}", message = "Caratteri non ammessi in username")
     private String nome;
+
     private LocalDateTime ricezione;
-    private Integer costo;
+
+    @Min(1)
+    private Double costo;
+
+    @Pattern(regexp = "[a-zA-Z0-9\\s-]{1,10}", message = "Caratteri non ammessi in campo")
     private String campo;
+
+    @Pattern(regexp = "[a-zA-Z0-9.;:\\s-]{1,255}", message = "Caratteri non ammessi in descrizione")
     private String descrizione;
+
+    @Min(1)
     private Integer partecipanti;
     
     @ManyToOne(cascade = CascadeType.REFRESH)

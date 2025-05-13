@@ -24,11 +24,11 @@
 
     <h2 class="text-center mb-4 mt-4">Modifica/Aggiungi Evento</h2>
 
-    <form th:object="${evento}" method="post" class="border p-5 rounded bg-light shadow-sm mb-5"
+    <form id="form" th:object="${evento}" method="post" class="border p-5 rounded bg-light shadow-sm mb-5"
       enctype="multipart/form-data">
       <div class="row g-4">
         <div class="col-md-4">
-          <input type="hidden" class="form-control" th:field="*{id}" required>
+          <input type="hidden" name="id" class="form-control" th:field="*{id}" required>
           <input type="hidden" class="form-control" th:field="*{indirizzo}" required>
           <input type="hidden" class="form-control" th:field="*{foto}">
           <!--<input type="hidden" class="form-control" th:field="*{ricezione}" /> -->
@@ -40,7 +40,8 @@
 
         <div class="col-md-4">
           <label for="name" class="form-label">Nome evento</label>
-          <input type="text" class="form-control" placeholder="max 50 caratteri" th:field="*{nome}" required>
+          <input type="text" name="nome" class="form-control" placeholder="max 50 caratteri" th:field="*{nome}" required>
+          <small th:if="${errori != null && errori.containsKey('nome')}" th:text="${errori.get('nome')}" class="text-danger"></small>
         </div>
 
         <div class="col-md-4">
@@ -50,22 +51,26 @@
 
         <div class="col-md-6">
           <label for="descrizione" class="form-label">Descrizione</label>
-          <input type="text" class="form-control" placeholder="max 255 caratteri" th:field="*{descrizione}" required>
+          <input type="text" name="descrizione" class="form-control" placeholder="max 255 caratteri" th:field="*{descrizione}" required>
+          <small th:if="${errori != null && errori.containsKey('descrizione')}" th:text="${errori.get('descrizione')}" class="text-danger"></small>
         </div>
 
         <div class="col-md-3">
           <label for="costo" class="form-label">Costo entrata (€)</label>
-          <input type="number" step="0.01" min="0.01" class="form-control" th:field="*{costo}" required>
+          <input type="number" name="costo" step="0.01" min="0.01" class="form-control" th:field="*{costo}" required>
+          <small th:if="${errori != null && errori.containsKey('costo')}" th:text="${errori.get('costo')}" class="text-danger"></small>
         </div>
 
         <div class="col-md-3">
           <label for="campo" class="form-label">Campo</label>
-          <input type="text" class="form-control" placeholder="max 10 caratteri" th:field="*{campo}" required>
+          <input type="text" name="campo" class="form-control" placeholder="max 10 caratteri" th:field="*{campo}" required>
+          <small th:if="${errori != null && errori.containsKey('campo')}" th:text="${errori.get('campo')}" class="text-danger"></small>
         </div>
 
         <div class="col-md-4">
           <label for="partecipanti" class="form-label">Numero partecipanti</label>
-          <input type="number" step="1" min="1" class="form-control" th:field="*{partecipanti}" required>
+          <input type="number" name="partecipanti" step="1" min="1" class="form-control" th:field="*{partecipanti}" required>
+          <small th:if="${errori != null && errori.containsKey('partecipanti')}" th:text="${errori.get('partecipanti')}" class="text-danger"></small>
         </div>
 
         <div class="col-md-4">
@@ -118,6 +123,59 @@
       </tbody>
     </table>
 
+    <script>
+      const form = document.getElementById("form");
+      const regex_nome = /^[a-zA-Z0-9\\s-]{1,50}$/;
+      const regex_descrizione = /^[a-zA-Z0-9.;:\\s-]{1,255}$/;
+      const regex_campo = /^[a-zA-Z0-9\\s-]{1,10}$/;
+
+      inputValido = form.elements.id.value ? true : false;
+
+      form.elements.nome.addEventListener("input", function() {
+        if(regex_nome.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.descrizione.addEventListener("input", function() {
+        if(regex_descrizione.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.campo.addEventListener("input", function() {
+        if(regex_campo.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.costo.addEventListener("input", function () {
+        const value = parseInt(this.value);
+        if (!isNaN(value) && Number.isInteger(value) && value > 0) {
+          this.style.borderColor = "";
+        } else {
+          this.style.borderColor = "red";
+        }
+      });
+
+      form.elements.partecipanti.addEventListener("input", function () {
+        const value = parseInt(this.value);
+        if (!isNaN(value) && Number.isInteger(value) && value > 0) {
+          this.style.borderColor = "";
+        } else {
+          this.style.borderColor = "red";
+        }
+      });
+    </script>
 
   </div>
 
