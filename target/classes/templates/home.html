@@ -159,7 +159,7 @@
                class="card-img-top" alt="Copertina Evento">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-primary" th:text="${evento.nome}">Nome Evento</h5>
-            <p class="card-text text-muted mb-2" th:text="'Ricezione: ' + ${evento.ricezione}">Ricezione</p>
+            <p class="card-text text-muted mb-2" th:text="'Data: ' + ${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}">Ricezione</p>
             <a th:href="@{/dettaglio(id=${evento.id})}" class="btn btn-outline-primary mt-auto">Dettagli</a>
           </div>
         </div>
