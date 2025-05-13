@@ -6,6 +6,8 @@
   <title>Centro Sportivo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Google Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <style>
     /* Imposta il corpo come un contenitore flex */
     html, body {
@@ -15,10 +17,11 @@
       flex-direction: column;
     }
 
-    /* Navbar personalizzata */
     .navbar-custom {
       background-color: #1A1A1A;
       border-bottom: 3px solid #FF6F61;
+      padding: 1rem 1.5rem;
+      min-height: 80px;
     }
     
     .navbar-brand {
@@ -66,6 +69,21 @@
       color: #333;
     }
 
+    .navbar-brand .material-symbols-outlined {
+      font-size: 28px;
+    }
+
+    .admin-link {
+      color: #FFF !important;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
     .card-text {
       font-size: 1rem;
       color: #555;
@@ -89,7 +107,7 @@
       text-align: center;
       font-size: 0.9rem;
       color: #333;
-      margin-top: auto; /* Aggiungi questa proprietà per spingere il footer in basso */
+      margin-top: auto; 
     }
 
     .footer a {
@@ -114,11 +132,17 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
-      <a class="navbar-brand fs-4" th:href="@{/}">Centro Sportivo</a>
+      <a class="navbar-brand fs-4" th:href="@{/}">
+        <span class="material-symbols-outlined">location_on</span>
+        Centro Sportivo
+      </a>
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link fs-5" th:href="@{/loginadmin}">Area Riservata Amministratore</a>
+            <a class="admin-link nav-link" th:href="@{/loginadmin}">
+              <span class="material-symbols-outlined">lock</span>
+              admin
+            </a>
           </li>
         </ul>
       </div>
