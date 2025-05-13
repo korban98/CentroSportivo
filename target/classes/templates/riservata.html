@@ -219,15 +219,16 @@
       </thead>
       <tbody>
         <tr th:each="evento : ${eventi}">
-          <td th:text="${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}">01/01/2025</td>
-          <td th:text="${evento.nome}">Torneo</td>
-          <td th:text="${evento.descrizione}">Descrizione evento</td>
-          <td th:text="${evento.sport.nome}">Calcio</td>
-          <td th:text="${evento.costo}">10.00</td>
-          <td th:text="${evento.campo}">Campo A</td>
-          <td th:text="${evento.partecipanti}">12</td>
+          <td th:text="${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}"></td>
+          <td th:text="${evento.nome}"></td>
+          <td th:text="${evento.descrizione}"></td>
+          <td th:text="${evento.sport.nome}"></td>
+          <td th:text="${evento.costo}"></td>
+          <td th:text="${evento.campo}"></td>
+          <td th:text="${evento.partecipanti}"></td>
           <td>
-            <img alt="foto evento" width="60" class="img-thumbnail" th:src="${evento.foto}">
+            <img alt="foto evento" width="60" class="img-thumbnail"
+              th:src="@{${evento.foto == null || evento.foto == '' ? 'images/no_img.png' : evento.foto}}">
           </td>
           <td>
             <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-primary">Modifica</a>
