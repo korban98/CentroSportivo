@@ -107,9 +107,9 @@
         Centro Sportivo
       </a>
       <div class="mx-auto">
-        <a class="nav-link text-white fw-semibold" th:href="@{/home}">
-          <span class="material-symbols-outlined">event</span>
-          Eventi
+        <a class="admin-link nav-link" th:href="@{/home}">
+            <span class="material-symbols-outlined">event</span>
+            Eventi
         </a>
       </div>
       <div>
@@ -132,7 +132,6 @@
           <input type="hidden" name="id" class="form-control" th:field="*{id}" required>
           <input type="hidden" class="form-control" th:field="*{indirizzo}" required>
           <input type="hidden" class="form-control" th:field="*{foto}">
-          <!--<input type="hidden" class="form-control" th:field="*{ricezione}" /> -->
           <label for="data" class="form-label">Data evento</label>
           <input type="datetime-local" class="form-control" name="ricezione"
             th:value="${evento.ricezione != null ? #temporals.format(evento.ricezione, 'yyyy-MM-dd''T''HH:mm') : ''}" />
@@ -236,9 +235,9 @@
 
     <script>
       const form = document.getElementById("form");
-      const regex_nome = /^[a-zA-Z0-9\\s-]{1,50}$/;
-      const regex_descrizione = /^[a-zA-Z0-9.;:\\s-]{1,255}$/;
-      const regex_campo = /^[a-zA-Z0-9\\s-]{1,10}$/;
+      const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
+      const regex_descrizione = /^[a-zA-Z0-9.;:\s-]{1,255}$/;
+      const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
 
       inputValido = form.elements.id.value ? true : false;
 
@@ -273,8 +272,10 @@
         const value = parseInt(this.value);
         if (!isNaN(value) && Number.isInteger(value) && value > 0) {
           this.style.borderColor = "";
+          inputValido = true;
         } else {
           this.style.borderColor = "red";
+          inputValido = false;
         }
       });
 
@@ -282,8 +283,10 @@
         const value = parseInt(this.value);
         if (!isNaN(value) && Number.isInteger(value) && value > 0) {
           this.style.borderColor = "";
+          inputValido = true;
         } else {
           this.style.borderColor = "red";
+          inputValido = false;
         }
       });
     </script>
