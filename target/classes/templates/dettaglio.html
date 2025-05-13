@@ -146,6 +146,33 @@
     .footer a {
       color: #FF6F61;
     }
+
+    .icon-bounce {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar-brand:hover .icon-bounce {
+      animation: bounce 0.4s ease;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+
+      30% {
+        transform: translateY(-8px);
+      }
+
+      60% {
+        transform: translateY(4px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 
@@ -154,7 +181,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
       <a class="navbar-brand fs-4" th:href="@{/}">
-        <span class="material-symbols-outlined">location_on</span>
+        <span class="material-symbols-outlined icon-bounce">location_on</span>
         Centro Sportivo
       </a>
       <div class="collapse navbar-collapse justify-content-end">
@@ -176,14 +203,10 @@
       <!-- Colonna Immagine -->
       <div class="image-card">
         <div class="card">
-          <img th:if="${evento.foto != null && evento.foto != ''}"
-               th:src="@{${evento.foto}}"
-               alt="Copertina Evento"
-               class="card-img-top">
-          <img th:if="${evento.foto == null || evento.foto == ''}"
-               th:src="@{images/no_img.png}"
-               alt="Copertina Evento"
-               class="card-img-top">
+          <img th:if="${evento.foto != null && evento.foto != ''}" th:src="@{${evento.foto}}" alt="Copertina Evento"
+            class="card-img-top">
+          <img th:if="${evento.foto == null || evento.foto == ''}" th:src="@{images/no_img.png}" alt="Copertina Evento"
+            class="card-img-top">
         </div>
       </div>
 
