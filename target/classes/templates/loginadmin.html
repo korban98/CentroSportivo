@@ -223,7 +223,29 @@
     </form>
     </div>
 
-      <!-- FOOTER -->
+    <script>
+      const form = document.getElementById("form");
+      const regex = /^[a-zA-Z0-9._-]{1,50}$/;
+      const errorMsg = document.getElementById("username-error");
+      inputValido = form.elements.id.value ? true : false;
+
+      form.elements.username.addEventListener("input", function () {
+        if (regex.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+          errorMsg.style.display = "none";
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+          errorMsg.style.display = "block";
+        }
+      });
+    </script>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
   <footer class="footer" style="background-color: #f8f8f8; padding: 20px 0; border-top: 1px solid #ddd; font-size: 14px; color: #333; margin-top: 40px;">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; padding: 0 20px;">
       
@@ -263,29 +285,6 @@
       <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza, Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
     </div>
   </footer>
-
-    <script>
-      const form = document.getElementById("form");
-      const regex = /^[a-zA-Z0-9._-]{1,50}$/;
-      const errorMsg = document.getElementById("username-error");
-      inputValido = form.elements.id.value ? true : false;
-
-      form.elements.username.addEventListener("input", function () {
-        if (regex.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-          errorMsg.style.display = "none";
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-          errorMsg.style.display = "block";
-        }
-      });
-    </script>
-
-  </div>
-</div>
-
 
 </body>
 </html>
