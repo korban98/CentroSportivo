@@ -12,151 +12,6 @@
     crossorigin="anonymous"></script>
   <!-- Google Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
-  <style>
-    body {
-      background-color: #f4f7fa;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-    }
-
-    /* Footer */
-    .footer {
-      background-color: #F8F9FA;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #333;
-      margin-top: auto; 
-    }
-
-    .footer a {
-      color: #FF6F61;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    .navbar-custom {
-      background-color: #1A1A1A;
-      border-bottom: 3px solid #FF6F61;
-      padding: 1rem 1.5rem;
-      min-height: 80px;
-    }
-
-    .navbar-brand {
-      font-weight: bold;
-      color: #FF6F61 !important;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .navbar-brand .material-symbols-outlined {
-      font-size: 28px;
-    }
-
-    .navbar-nav .nav-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .admin-link {
-      color: #FFF !important;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 0.9rem;
-      padding: 0.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .admin-link:hover {
-      color: #FF6F61 !important;
-    }
-
-    .admin-link .material-symbols-outlined {
-      font-size: 28px;
-      margin-bottom: 0.25rem;
-    }
-
-    .icon-bounce {
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-
-    .navbar-brand:hover .icon-bounce {
-      animation: bounce 0.4s ease;
-    }
-
-    .btn {
-      font-weight: bold;
-      font-size: 14px;
-      text-transform: uppercase;
-      padding: 0.5rem 1.5rem;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn-modifica {
-      background-color: #1A1A1A; 
-      border-color: #1A1A1A;
-      color: white;
-      padding: 0.25rem 1rem; 
-      font-size: 13px;
-      margin-bottom: 3px; 
-    }
-
-    .btn-elimina {
-      background-color: #FF6F61;
-      border-color: #FF6F61;
-      color: white;
-      padding: 0.25rem 1rem;
-      font-size: 13px; 
-    }
-
-    .btn-success {
-      background-color: #5D8F46; 
-      border-color: #5D8F46;
-      color: white;
-      padding: 0.5rem 2rem; 
-      font-size: 16px;
-    }
-
-    .btn:hover {
-      opacity: 0.85; 
-    }
-
-    .w-100 {
-      width: 100%; 
-    }
-
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-
-      30% {
-        transform: translateY(-8px);
-      }
-
-      60% {
-        transform: translateY(4px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -183,11 +38,10 @@
   </nav>
 
   <div class="container">
-
-    <h2 class="text-center mb-4 mt-4">Modifica/Aggiungi Evento</h2>
-
+    
     <form id="form" th:object="${evento}" method="post" class="border p-5 rounded bg-light shadow-sm mb-5"
       enctype="multipart/form-data">
+      <p class="title">Aggiungi-Modifica Evento </p>
       <div class="row g-4">
         <div class="col-md-4">
           <input type="hidden" name="id" class="form-control" th:field="*{id}" required>
