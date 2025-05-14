@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,173 +13,184 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" th:href="@{/css/riservata.css}" />
 </head>
-<body>
 
+<body>
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid d-flex justify-content-between align-items-center w-100">
       <a class="navbar-brand fs-4" th:href="@{/}">
-        <span class="material-symbols-outlined icon-bounce">location_on</span>
-        Centro Sportivo
-      </a>
+        <span class="material-symbols-outlined icon-bounce">location_on</span> Centro Sportivo </a>
       <div class="mx-auto">
-        <a class="admin-link nav-link" th:href="@{/home}">
-            <span class="material-symbols-outlined">event</span>
-            Eventi
+        <a class="admin-link nav-link" th:href="@{/home}"><span class="material-symbols-outlined">event</span> Eventi
         </a>
       </div>
       <div>
         <a class="admin-link nav-link" th:href="@{/riservata/logout}">
-          <span class="material-symbols-outlined">logout</span>
-          <span th:text="|Logout ${admin.username}|">Logout</span>
+          <span class="material-symbols-outlined">logout</span> <span th:text="|Logout ${admin.username}|">Logout</span>
         </a>
       </div>
     </div>
   </nav>
-
-  <div class="container">
-
-    <form id="form" th:object="${evento}" method="post" class="border p-5 rounded bg-light shadow-sm mb-5"
-      enctype="multipart/form-data">
-      <p class="title">Aggiungi-Modifica Evento </p>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <input type="hidden" name="id" class="form-control" th:field="*{id}" required>
-          <input type="hidden" class="form-control" th:field="*{indirizzo}" required>
-          <input type="hidden" class="form-control" th:field="*{foto}">
-          <label for="data" class="form-label">Data evento</label>
-          <input type="datetime-local" class="form-control" name="ricezione"
-            th:value="${evento.ricezione != null ? #temporals.format(evento.ricezione, 'yyyy-MM-dd''T''HH:mm') : ''}" />
-
-        </div>
-
-        <div class="col-md-4">
-          <label for="name" class="form-label">Nome evento</label>
-          <input type="text" name="nome" class="form-control" placeholder="max 50 caratteri" th:field="*{nome}"
-            required>
-          <small th:if="${errori != null && errori.containsKey('nome')}" th:text="${errori.get('nome')}"
-            class="text-danger"></small>
-        </div>
-
-        <div class="col-md-4">
-          <label for="foto" class="form-label">Foto evento</label>
-          <input type="file" class="form-control" name="fotoEvento">
-        </div>
-
-        <div class="col-md-6">
-          <label for="descrizione" class="form-label">Descrizione</label>
-          <input type="text" name="descrizione" class="form-control" placeholder="max 255 caratteri"
-            th:field="*{descrizione}" required>
-          <small th:if="${errori != null && errori.containsKey('descrizione')}" th:text="${errori.get('descrizione')}"
-            class="text-danger"></small>
-        </div>
-
-        <div class="col-md-3">
-          <label for="costo" class="form-label">Costo entrata (€)</label>
-          <input type="number" name="costo" step="0.01" min="0.01" class="form-control" th:field="*{costo}" required>
-          <small th:if="${errori != null && errori.containsKey('costo')}" th:text="${errori.get('costo')}"
-            class="text-danger"></small>
-        </div>
-
-        <div class="col-md-3">
-          <label for="campo" class="form-label">Campo</label>
-          <input type="text" name="campo" class="form-control" placeholder="max 10 caratteri" th:field="*{campo}"
-            required>
-          <small th:if="${errori != null && errori.containsKey('campo')}" th:text="${errori.get('campo')}"
-            class="text-danger"></small>
-        </div>
-
-        <div class="col-md-4">
-          <label for="partecipanti" class="form-label">Numero partecipanti</label>
-          <input type="number" name="partecipanti" step="1" min="1" class="form-control" th:field="*{partecipanti}"
-            required>
-          <small th:if="${errori != null && errori.containsKey('partecipanti')}" th:text="${errori.get('partecipanti')}"
-            class="text-danger"></small>
-        </div>
-
-        <div class="col-md-4">
-          <label for="sport" class="form-label">Sport</label>
-          <select class="form-select" th:field="*{sport}" required>
-            <option value="" disabled selected>-- Seleziona uno sport --</option>
-            <option th:each="sport : ${sportList}" th:value="${sport.id}" th:text="${sport.nome}"></option>
-          </select>
-        </div>
-
-        <div class="mt-4 text-end">
-          <button type="submit" class="btn btn-success px-5">Salva Evento</button>
-        </div>
+  <div class="container my-5">
+    <!-- Header con titolo della pagina -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h1 class="page-header">Gestione Eventi</h1>
       </div>
-    </form>
+    </div>
+    <!-- Form in un container stilizzato -->
+    <div class="form-container">
+      <form id="form" th:object="${evento}" method="post" enctype="multipart/form-data">
+        <p class="title">Aggiungi-Modifica Evento</p>
 
-    <h2 class="text-center mb-4 mt-5">Eventi Registrati</h2>
+        <div class="row g-4">
+          <!-- Campi nascosti -->
+          <div class="col-md-4">
+            <input type="hidden" name="id" class="form-control" th:field="*{id}" required>
+            <input type="hidden" class="form-control" th:field="*{indirizzo}" required>
+            <input type="hidden" class="form-control" th:field="*{foto}">
+            <label for="data" class="form-label">Data evento</label>
+            <input type="datetime-local" class="form-control" name="ricezione"
+              th:value="${evento.ricezione != null ? #temporals.format(evento.ricezione, 'yyyy-MM-dd''T''HH:mm') : ''}" />
+          </div>
 
-    <table class="table table-bordered text-center align-middle shadow-sm">
-      <thead class="table-light">
-        <tr>
-          <th>Data</th>
-          <th>Nome</th>
-          <th>Descrizione</th>
-          <th>Sport</th>
-          <th>Costo (€)</th>
-          <th>Campo</th>
-          <th>Partecipanti</th>
-          <th>Foto</th>
-          <th>Azioni</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="evento : ${eventi}">
-          <td th:text="${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}"></td>
-          <td th:text="${evento.nome}"></td>
-          <td th:text="${evento.descrizione}"></td>
-          <td th:text="${evento.sport.nome}"></td>
-          <td th:text="${evento.costo}"></td>
-          <td th:text="${evento.campo}"></td>
-          <td th:text="${evento.partecipanti}"></td>
-          <td>
-            <img alt="foto evento" width="60" class="img-thumbnail"
-              th:src="@{${evento.foto == null || evento.foto == '' ? 'images/no_img.png' : evento.foto}}">
-          </td>
-          <td>
-            <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-modifica w-100">
-              Modifica
-            </a>
-            <a th:href="@{/riservata/rimuovi(id=${evento.id})}" class="btn btn-sm btn-elimina w-100">
-              Elimina
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <div class="col-md-4">
+            <label for="name" class="form-label">Nome evento</label>
+            <input type="text" name="nome" class="form-control" placeholder="max 50 caratteri" th:field="*{nome}"
+              required>
+            <small th:if="${errori != null && errori.containsKey('nome')}" th:text="${errori.get('nome')}"
+              class="text-danger"></small>
+          </div>
 
-    
+          <div class="col-md-4">
+            <label for="foto" class="form-label">Foto evento</label>
+            <input type="file" class="form-control" name="fotoEvento">
+          </div>
 
+          <div class="col-md-6">
+            <label for="descrizione" class="form-label">Descrizione</label>
+            <input type="text" name="descrizione" class="form-control" placeholder="max 255 caratteri"
+              th:field="*{descrizione}" required>
+            <small th:if="${errori != null && errori.containsKey('descrizione')}" th:text="${errori.get('descrizione')}"
+              class="text-danger"></small>
+          </div>
+
+          <div class="col-md-3">
+            <label for="costo" class="form-label">Costo entrata (€)</label>
+            <input type="number" name="costo" step="0.01" min="0.01" class="form-control" th:field="*{costo}" required>
+            <small th:if="${errori != null && errori.containsKey('costo')}" th:text="${errori.get('costo')}"
+              class="text-danger"></small>
+          </div>
+
+          <div class="col-md-3">
+            <label for="campo" class="form-label">Campo</label>
+            <input type="text" name="campo" class="form-control" placeholder="max 10 caratteri" th:field="*{campo}"
+              required>
+            <small th:if="${errori != null && errori.containsKey('campo')}" th:text="${errori.get('campo')}"
+              class="text-danger"></small>
+          </div>
+
+          <div class="col-md-4">
+            <label for="partecipanti" class="form-label">Numero partecipanti</label>
+            <input type="number" name="partecipanti" step="1" min="1" class="form-control" th:field="*{partecipanti}"
+              required>
+            <small th:if="${errori != null && errori.containsKey('partecipanti')}"
+              th:text="${errori.get('partecipanti')}" class="text-danger"></small>
+          </div>
+
+          <div class="col-md-4">
+            <label for="sport" class="form-label">Sport</label>
+            <select class="form-select" th:field="*{sport}" required>
+              <option value="" disabled selected>-- Seleziona uno sport --</option>
+              <option th:each="sport : ${sportList}" th:value="${sport.id}" th:text="${sport.nome}"></option>
+            </select>
+          </div>
+
+          <div class="col-12 mt-4 text-end">
+            <button type="submit" class="btn btn-success px-5">
+              <span class="material-symbols-outlined me-2"
+                style="font-size: 20px; vertical-align: text-bottom;">save</span>
+              Salva Evento
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="page-header mt-5 mb-4">Eventi Registrati</h2>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center align-middle table-custom">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Descrizione</th>
+            <th>Sport</th>
+            <th>Costo (€)</th>
+            <th>Campo</th>
+            <th>Partecipanti</th>
+            <th>Foto</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="evento : ${eventi}">
+            <td th:text="${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${evento.nome}"></td>
+            <td th:text="${evento.descrizione}"></td>
+            <td th:text="${evento.sport.nome}"></td>
+            <td th:text="${evento.costo}"></td>
+            <td th:text="${evento.campo}"></td>
+            <td th:text="${evento.partecipanti}"></td>
+            <td>
+              <img alt="foto evento" width="60" class="img-thumbnail"
+                th:src="@{${evento.foto == null || evento.foto == '' ? 'images/no_img.png' : evento.foto}}">
+            </td>
+            <td>
+              <div class="d-grid gap-2">
+                <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-modifica">
+                  <span class="material-symbols-outlined"
+                    style="font-size: 16px; vertical-align: text-bottom;">edit</span>
+                  Modifica
+                </a>
+                <a th:href="@{/riservata/rimuovi(id=${evento.id})}" class="btn btn-sm btn-elimina">
+                  <span class="material-symbols-outlined"
+                    style="font-size: 16px; vertical-align: text-bottom;">delete</span>
+                  Elimina
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-
   <!-- FOOTER -->
-  <footer class="footer" style="background-color: #f8f8f8; padding: 20px 0; border-top: 1px solid #ddd; font-size: 14px; color: #333; margin-top: 40px;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; padding: 0 20px;">
-      
+  <footer class="footer"
+    style="background-color: #f8f8f8; padding: 20px 0; border-top: 1px solid #ddd; font-size: 14px; color: #333; margin-top: 40px;">
+    <div
+      style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; padding: 0 20px;">
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Centro Sportivo</h4>
         <p>Via dello Sport, 123<br>
-        80010 Napoli (NA), Italia</p>
+          80010 Napoli (NA), Italia</p>
       </div>
-      
+
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Contatti</h4>
         <p>Telefono: <a href="tel:+390612345678">+39 06 12345678</a><br>
-        Email: <a href="mailto:info@centrosportivo.it">info@centrosportivo.it</a><br>
-        PEC: centrosportivo@pec.it</p>
+          Email: <a href="mailto:info@centrosportivo.it">info@centrosportivo.it</a><br>
+          PEC: centrosportivo@pec.it</p>
       </div>
-      
+
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Orari di apertura</h4>
         <p>Lun - Ven: 08:00 - 22:00<br>
-        Sabato: 09:00 - 02:00<br>
-        Domenica: 09:00 - 00:00</p>
+          Sabato: 09:00 - 02:00<br>
+          Domenica: 09:00 - 00:00</p>
       </div>
-      
+
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Link utili</h4>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -194,92 +204,79 @@
 
     <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #777;">
       <p>&copy; 2025 Centro Sportivo | Traccia #2: Centro Sportivo | P.IVA 12345678901</p>
-      <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza, Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
+      <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza,
+        Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
     </div>
   </footer>
-
   <script>
-      const form = document.getElementById("form");
-      const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
-      const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
-      const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
-
+  const form = document.getElementById("form");
+  const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
+  const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
+  const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
+  inputValido = false; form.elements.nome.addEventListener("input", function (){
+    if (this.value === "")
+    { this.style.borderColor = ""; inputValido = false; }
+    else if
+      (regex_nome.test(this.value)){
+        this.style.borderColor = "";
+        inputValido = true;
+      } else {
+        this.style.borderColor = "#FF6F61";
+        inputValido = false;
+      }
+  });
+  form.elements.descrizione.addEventListener("input", function () {
+    if (this.value === "") {
+      this.style.borderColor = "";
       inputValido = false;
-
-      form.elements.nome.addEventListener("input", function () {
-        if (this.value === "") {
-          this.style.borderColor = "";
-          inputValido = false;
-        } else if (regex_nome.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
+      } else if (regex_descrizione.test(this.value)) {
+        this.style.borderColor = "";
+        inputValido = true;
         } else {
-          this.style.borderColor = "red";
+          this.style.borderColor = "#FF6F61";
           inputValido = false;
-        }
-      });
-      form.elements.descrizione.addEventListener("input", function () {
-        if (this.value === "") {
-          this.style.borderColor = "";
-          inputValido = false;
-        } else if (regex_descrizione.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
+          }
+  });
+  form.elements.campo.addEventListener("input", function () {
+    if (this.value === "") {
+      this.style.borderColor = "";
+      inputValido = false;
+      } else if (regex_campo.test(this.value)) {
+        this.style.borderColor = "";
+        inputValido = true;
         } else {
-          this.style.borderColor = "red";
+          this.style.borderColor = "#FF6F61";
           inputValido = false;
-        }
-      });
-      form.elements.campo.addEventListener("input", function () {
-        if (this.value === "") {
-          this.style.borderColor = "";
-          inputValido = false;
-        } else if (regex_campo.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
-      });
-      form.elements.costo.addEventListener("input", function () {
-        const value = this.value;
-        if (value === "") {
-          this.style.borderColor = "";
-          inputValido = false;
+          }
+    });
+    form.elements.costo.addEventListener("input", function () {
+      const value = this.value;
+      if (value === "") {
+        this.style.borderColor = ""; inputValido = false;
         } else if (/^[1-9]*$/.test(value)) {
           this.style.borderColor = "";
           inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
-      });
-      form.elements.costo.addEventListener("keypress", function (e) {
-        if (!/[0-9]/.test(e.key)) {
-          e.preventDefault();
-        }
-      });
+          } else {
+            this.style.borderColor = "#FF6F61";
+            inputValido = false;
+            }
+    });
+    form.elements.costo.addEventListener("keypress", function (e) {
+      if (!/[0-9]/.test(e.key)) { e.preventDefault(); } });
       form.elements.partecipanti.addEventListener("input", function () {
         const value = this.value;
         if (value === "") {
           this.style.borderColor = "";
           inputValido = false;
-        } else if (/^[1-9]*$/.test(value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
+          } else if (/^[1-9]*$/.test(value)) {
+            this.style.borderColor = "";
+            inputValido = true;
+            } else {
+              this.style.borderColor = "#FF6F61";
+              inputValido = false; }
       });
       form.elements.partecipanti.addEventListener("keypress", function (e) {
-        if (!/[0-9]/.test(e.key)) {
-          e.preventDefault();
-        }
-      });
-    </script>
-
+        if (!/[0-9]/.test(e.key)) { e.preventDefault(); } });
+  </script>
 </body>
-
 </html>
