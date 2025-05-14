@@ -93,12 +93,13 @@
     .btn-outline-primary {
       color: #FF6F61;
       border-color: #FF6F61;
+      margin-top: 1.5rem;
     }
 
     .btn-outline-primary:hover {
       background-color: #FF6F61;
-      color: white;
-      border-color: #FF6F61;
+      color: rgb(0, 0, 0);
+      border-color:black;
     }
 
     /* Footer */
@@ -180,7 +181,7 @@
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-primary" th:text="${evento.nome}">Nome Evento</h5>
             <p class="card-text text-muted mb-2" th:text="'Data: ' + ${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}">Ricezione</p>
-            <a th:href="@{/dettaglio(id=${evento.id})}" class="btn btn-outline-primary mt-auto">Dettagli</a>
+            <a th:href="@{/dettaglio(id=${evento.id})}" class="btn btn-outline-primary mt-auto"><b>Dettagli</b></a>
           </div>
         </div>
       </div>
