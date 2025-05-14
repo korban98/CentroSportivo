@@ -70,7 +70,7 @@ public class EventoServiceImpl implements EventoService {
         if(!nome.matches("[a-zA-Z0-9\\s-]{1,50}")) {
             errori.put("nome", "Caratteri non ammessi in nome");
         }
-        if(!descrizione.matches("[a-zA-Z0-9.;:\\s-]{1,255}")) {
+        if(!descrizione.matches("[a-zA-Z0-9'\",.;:\\s-]{1,255}")) {
             errori.put("descrizione", "Caratteri non ammessi in descrizione");
         }
         if(!campo.matches("[a-zA-Z0-9\\s-]{1,10}")) {

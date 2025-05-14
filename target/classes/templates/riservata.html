@@ -236,7 +236,7 @@
     <script>
       const form = document.getElementById("form");
       const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
-      const regex_descrizione = /^[a-zA-Z0-9.;:\s-]{1,255}$/;
+      const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
       const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
 
       inputValido = form.elements.id.value ? true : false;
