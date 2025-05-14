@@ -12,6 +12,7 @@
     crossorigin="anonymous"></script>
   <!-- Google Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" th:href="@{/css/riservata.css}" />
 </head>
 <body>
 
@@ -38,7 +39,7 @@
   </nav>
 
   <div class="container">
-    
+
     <form id="form" th:object="${evento}" method="post" class="border p-5 rounded bg-light shadow-sm mb-5"
       enctype="multipart/form-data">
       <p class="title">Aggiungi-Modifica Evento </p>
