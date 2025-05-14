@@ -48,7 +48,7 @@ INSERT INTO `admin` (`id`, `username`, `psw`) VALUES
 
 CREATE TABLE `evento` (
   `id` int(11) NOT NULL,
-  `foto` longtext NOT NULL,
+  `foto` longtext DEFAULT NULL,
   `nome` varchar(50) NOT NULL,
   `ricezione` datetime NOT NULL,
   `costo` double NOT NULL,
