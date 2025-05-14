@@ -21,6 +21,25 @@
       margin: 0;
     }
 
+    /* Footer */
+    .footer {
+      background-color: #F8F9FA;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: auto; 
+    }
+
+    .footer a {
+      color: #FF6F61;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
     .navbar-custom {
       background-color: #1A1A1A;
       border-bottom: 3px solid #FF6F61;
@@ -154,6 +173,7 @@
 </head>
 
 <body>
+
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid d-flex justify-content-between align-items-center w-100">
@@ -201,27 +221,71 @@
         <button type="submit" class="button1">Login</button>
       </div>
     </form>
+    </div>
+
+      <!-- FOOTER -->
+  <footer class="footer" style="background-color: #f8f8f8; padding: 20px 0; border-top: 1px solid #ddd; font-size: 14px; color: #333; margin-top: 40px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; padding: 0 20px;">
+      
+      <div style="flex: 1 1 250px; margin-bottom: 15px;">
+        <h4 style="margin-bottom: 10px;">Centro Sportivo</h4>
+        <p>Via dello Sport, 123<br>
+        80010 Napoli (NA), Italia</p>
+      </div>
+      
+      <div style="flex: 1 1 250px; margin-bottom: 15px;">
+        <h4 style="margin-bottom: 10px;">Contatti</h4>
+        <p>Telefono: <a href="tel:+390612345678">+39 06 12345678</a><br>
+        Email: <a href="mailto:info@centrosportivo.it">info@centrosportivo.it</a><br>
+        PEC: centrosportivo@pec.it</p>
+      </div>
+      
+      <div style="flex: 1 1 250px; margin-bottom: 15px;">
+        <h4 style="margin-bottom: 10px;">Orari di apertura</h4>
+        <p>Lun - Ven: 08:00 - 22:00<br>
+        Sabato: 09:00 - 02:00<br>
+        Domenica: 09:00 - 00:00</p>
+      </div>
+      
+      <div style="flex: 1 1 250px; margin-bottom: 15px;">
+        <h4 style="margin-bottom: 10px;">Link utili</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li><a href="#">Chi siamo</a></li>
+          <li><a href="#">Servizi</a></li>
+          <li><a href="#">Prenotazioni</a></li>
+          <li><a href="#">Contattaci</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #777;">
+      <p>&copy; 2025 Centro Sportivo | Traccia #2: Centro Sportivo | P.IVA 12345678901</p>
+      <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza, Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
+    </div>
+  </footer>
+
+    <script>
+      const form = document.getElementById("form");
+      const regex = /^[a-zA-Z0-9._-]{1,50}$/;
+      const errorMsg = document.getElementById("username-error");
+      inputValido = form.elements.id.value ? true : false;
+
+      form.elements.username.addEventListener("input", function () {
+        if (regex.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+          errorMsg.style.display = "none";
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+          errorMsg.style.display = "block";
+        }
+      });
+    </script>
+
   </div>
 </div>
 
 
-  <script>
-    const form = document.getElementById("form");
-    const regex = /^[a-zA-Z0-9._-]{1,50}$/;
-    const errorMsg = document.getElementById("username-error");
-    let inputValido = form.elements.id.value ? true : false;
-
-    form.elements.username.addEventListener("input", function () {
-      if (regex.test(this.value)) {
-        this.style.borderColor = "";
-        inputValido = true;
-        errorMsg.style.display = "none";
-      } else {
-        this.style.borderColor = "red";
-        inputValido = false;
-        errorMsg.style.display = "block";
-      }
-    });
-  </script>
 </body>
 </html>
