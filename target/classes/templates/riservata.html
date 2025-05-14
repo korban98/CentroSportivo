@@ -12,109 +12,7 @@
     crossorigin="anonymous"></script>
   <!-- Google Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
-  <style>
-    body {
-      background-color: #f4f7fa;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-    }
-
-    /* Footer */
-    .footer {
-      background-color: #F8F9FA;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #333;
-      margin-top: auto; 
-    }
-
-    .footer a {
-      color: #FF6F61;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    .navbar-custom {
-      background-color: #1A1A1A;
-      border-bottom: 3px solid #FF6F61;
-      padding: 1rem 1.5rem;
-      min-height: 80px;
-    }
-
-    .navbar-brand {
-      font-weight: bold;
-      color: #FF6F61 !important;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .navbar-brand .material-symbols-outlined {
-      font-size: 28px;
-    }
-
-    .navbar-nav .nav-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .admin-link {
-      color: #FFF !important;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 0.9rem;
-      padding: 0.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .admin-link:hover {
-      color: #FF6F61 !important;
-    }
-
-    .admin-link .material-symbols-outlined {
-      font-size: 28px;
-      margin-bottom: 0.25rem;
-    }
-
-    .icon-bounce {
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-
-    .navbar-brand:hover .icon-bounce {
-      animation: bounce 0.4s ease;
-    }
-
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-
-      30% {
-        transform: translateY(-8px);
-      }
-
-      60% {
-        transform: translateY(4px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
-    }
-  </style>
+  <link rel="stylesheet" th:href="@{/css/riservata.css}" />
 </head>
 <body>
 
@@ -142,10 +40,9 @@
 
   <div class="container">
 
-    <h2 class="text-center mb-4 mt-4">Modifica/Aggiungi Evento</h2>
-
     <form id="form" th:object="${evento}" method="post" class="border p-5 rounded bg-light shadow-sm mb-5"
       enctype="multipart/form-data">
+      <p class="title">Aggiungi-Modifica Evento </p>
       <div class="row g-4">
         <div class="col-md-4">
           <input type="hidden" name="id" class="form-control" th:field="*{id}" required>
@@ -245,70 +142,18 @@
               th:src="@{${evento.foto == null || evento.foto == '' ? 'images/no_img.png' : evento.foto}}">
           </td>
           <td>
-            <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-primary">Modifica</a>
-            <a th:href="@{/riservata/rimuovi(id=${evento.id})}" class="btn btn-sm btn-danger">Rimuovi</a>
+            <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-modifica w-100">
+              Modifica
+            </a>
+            <a th:href="@{/riservata/rimuovi(id=${evento.id})}" class="btn btn-sm btn-elimina w-100">
+              Elimina
+            </a>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <script>
-      const form = document.getElementById("form");
-      const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
-      const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
-      const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
-
-      inputValido = form.elements.id.value ? true : false;
-
-      form.elements.nome.addEventListener("input", function () {
-        if (regex_nome.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
-      });
-      form.elements.descrizione.addEventListener("input", function () {
-        if (regex_descrizione.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
-      });
-      form.elements.campo.addEventListener("input", function () {
-        if (regex_campo.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
-      });
-      form.elements.costo.addEventListener("input", function () {
-        const value = parseInt(this.value);
-        if (!isNaN(value) && Number.isInteger(value) && value > 0) {
-          this.style.borderColor = "";
-          inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
-      });
-
-      form.elements.partecipanti.addEventListener("input", function () {
-        const value = parseInt(this.value);
-        if (!isNaN(value) && Number.isInteger(value) && value > 0) {
-          this.style.borderColor = "";
-          inputValido = true;
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-        }
-      });
-    </script>
+    
 
   </div>
 
@@ -352,6 +197,88 @@
       <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza, Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
     </div>
   </footer>
+
+  <script>
+      const form = document.getElementById("form");
+      const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
+      const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
+      const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
+
+      inputValido = false;
+
+      form.elements.nome.addEventListener("input", function () {
+        if (this.value === "") {
+          this.style.borderColor = "";
+          inputValido = false;
+        } else if (regex_nome.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.descrizione.addEventListener("input", function () {
+        if (this.value === "") {
+          this.style.borderColor = "";
+          inputValido = false;
+        } else if (regex_descrizione.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.campo.addEventListener("input", function () {
+        if (this.value === "") {
+          this.style.borderColor = "";
+          inputValido = false;
+        } else if (regex_campo.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.costo.addEventListener("input", function () {
+        const value = this.value;
+        if (value === "") {
+          this.style.borderColor = "";
+          inputValido = false;
+        } else if (/^[1-9]*$/.test(value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.costo.addEventListener("keypress", function (e) {
+        if (!/[0-9]/.test(e.key)) {
+          e.preventDefault();
+        }
+      });
+      form.elements.partecipanti.addEventListener("input", function () {
+        const value = this.value;
+        if (value === "") {
+          this.style.borderColor = "";
+          inputValido = false;
+        } else if (/^[1-9]*$/.test(value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+        }
+      });
+      form.elements.partecipanti.addEventListener("keypress", function (e) {
+        if (!/[0-9]/.test(e.key)) {
+          e.preventDefault();
+        }
+      });
+    </script>
 
 </body>
 
