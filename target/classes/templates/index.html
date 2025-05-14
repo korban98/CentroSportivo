@@ -104,7 +104,12 @@
       font-weight: 700;
     }
     
-    
+    .carousel-item img {
+      height: 600px;         /* Altezza uniforme */
+      width: 100%;           /* Larghezza piena del contenitore */
+      object-fit: cover;     /* Ritaglia l'immagine mantenendo proporzioni */
+      object-position: center; /* Centra l'immagine */
+    }
   </style>
 </head>
 
@@ -133,7 +138,7 @@
   </nav>
   
   <!-- CAROSELLO -->
-  <div class="container mt-5">
+  <div class="container mt-4">
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -163,7 +168,7 @@
   </div>
 
   <!-- CONTENUTO -->
-  <div class="container mt-5">
+  <div class="container mt-4">
     <div class="content-wrapper">
       <h1 class="mb-4 text-center">Benvenuti al Centro Polisportivo "Energia & Sport"</h1>
 
