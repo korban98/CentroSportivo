@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <style>
     /* Imposta il corpo come un contenitore flex */
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       display: flex;
@@ -22,22 +24,21 @@
       border-bottom: 3px solid #FF6F61;
       padding: 1rem 1.5rem;
       min-height: 80px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
     }
-    
+
+
     .navbar-brand {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       font-weight: bold;
       color: #FF6F61 !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .navbar-nav .nav-link {
-      color: #FFF !important;
-      font-size: 1.1rem;
-    }
-
-    .navbar-nav .nav-link:hover {
-      color: #FF6F61 !important;
-    }
 
     /* Card Evento */
     .card {
@@ -99,7 +100,7 @@
     .btn-outline-primary:hover {
       background-color: #FF6F61;
       color: rgb(0, 0, 0);
-      border-color:black;
+      border-color: black;
     }
 
     /* Footer */
@@ -109,7 +110,7 @@
       text-align: center;
       font-size: 0.9rem;
       color: #333;
-      margin-top: auto; 
+      margin-top: auto;
     }
 
     .footer a {
@@ -122,20 +123,36 @@
     }
 
     .icon-bounce {
-        display: inline-block;
-        transition: transform 0.3s ease;
+      display: inline-block;
+      font-size: 28px;
+    }
+
+    .navbar-brand .material-symbols-outlined {
+      font-size: 28px;
+    }
+
+    .navbar-brand:hover .material-symbols-outlined {
+      animation: jump 0.5s ease-in-out;
+    }
+
+    @keyframes jump {
+      0% {
+        transform: translateY(0);
       }
 
-    .navbar-brand:hover .icon-bounce {
-      animation: bounce 0.4s ease;
+      30% {
+        transform: translateY(-10px);
+      }
+
+      60% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
     }
 
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      30% { transform: translateY(-8px); }
-      60% { transform: translateY(4px); }
-      100% { transform: translateY(0); }
-    }
 
     /* Media Queries per schermi piccoli */
     @media (max-width: 576px) {
@@ -145,29 +162,29 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid d-flex justify-content-between align-items-center w-100">
       <a class="navbar-brand fs-4" th:href="@{/}">
-        <span class="material-symbols-outlined icon-bounce">location_on</span>
+        <span class="material-symbols-outlined icon-bounce">sports_soccer</span>
         Centro Sportivo
       </a>
-      <div class="mx-auto">
+      <div class="d-flex gap-4">
         <a class="admin-link nav-link" th:href="@{/home}">
-            <span class="material-symbols-outlined">event</span>
-            Eventi
+          <span class="material-symbols-outlined">event</span>
+          Eventi
         </a>
-      </div>
-      <div>
         <a class="admin-link nav-link" th:href="@{/riservata}">
-            <span class="material-symbols-outlined">lock</span>
-            Admin
+          <span class="material-symbols-outlined">lock</span>
+          Admin
         </a>
       </div>
     </div>
   </nav>
+
 
 
   <!-- CONTENUTO PRINCIPALE -->
@@ -177,10 +194,11 @@
       <div th:each="evento : ${eventi}" class="col-sm-6 col-md-4 col-lg-3">
         <div th:if="${evento.ricezione}" class="card">
           <img th:src="@{${evento.foto == null || evento.foto == '' ? 'images/no_img.png' : evento.foto}}"
-               class="card-img-top" alt="Copertina Evento">
+            class="card-img-top" alt="Copertina Evento">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-primary" th:text="${evento.nome}">Nome Evento</h5>
-            <p class="card-text text-muted mb-2" th:text="'Data: ' + ${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}">Ricezione</p>
+            <p class="card-text text-muted mb-2"
+              th:text="'Data: ' + ${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}">Ricezione</p>
             <a th:href="@{/dettaglio(id=${evento.id})}" class="btn btn-outline-primary mt-auto"><b>Dettagli</b></a>
           </div>
         </div>
@@ -189,29 +207,31 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="footer" style="background-color: #f8f8f8; padding: 20px 0; border-top: 1px solid #ddd; font-size: 14px; color: #333; margin-top: 40px;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; padding: 0 20px;">
-      
+  <footer class="footer"
+    style="background-color: #f8f8f8; padding: 20px 0; border-top: 1px solid #ddd; font-size: 14px; color: #333; margin-top: 40px;">
+    <div
+      style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; padding: 0 20px;">
+
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Centro Sportivo</h4>
         <p>Via dello Sport, 123<br>
-        80010 Napoli (NA), Italia</p>
+          80010 Napoli (NA), Italia</p>
       </div>
-      
+
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Contatti</h4>
         <p>Telefono: <a href="tel:+390612345678">+39 06 12345678</a><br>
-        Email: <a href="mailto:info@centrosportivo.it">info@centrosportivo.it</a><br>
-        PEC: centrosportivo@pec.it</p>
+          Email: <a href="mailto:info@centrosportivo.it">info@centrosportivo.it</a><br>
+          PEC: centrosportivo@pec.it</p>
       </div>
-      
+
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Orari di apertura</h4>
         <p>Lun - Ven: 08:00 - 22:00<br>
-        Sabato: 09:00 - 02:00<br>
-        Domenica: 09:00 - 00:00</p>
+          Sabato: 09:00 - 02:00<br>
+          Domenica: 09:00 - 00:00</p>
       </div>
-      
+
       <div style="flex: 1 1 250px; margin-bottom: 15px;">
         <h4 style="margin-bottom: 10px;">Link utili</h4>
         <ul style="list-style: none; padding: 0; margin: 0;">
@@ -225,9 +245,11 @@
 
     <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #777;">
       <p>&copy; 2025 Centro Sportivo | Traccia #2: Centro Sportivo | P.IVA 12345678901</p>
-      <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza, Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
+      <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza,
+        Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
     </div>
   </footer>
 
 </body>
+
 </html>
