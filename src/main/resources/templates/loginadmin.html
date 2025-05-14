@@ -10,166 +10,6 @@
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" th:href="@{/css/loginadmin.css}" />
-  <style>
-    body {
-      background-color: #f4f7fa;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-    }
-
-    /* Footer */
-    .footer {
-      background-color: #F8F9FA;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #333;
-      margin-top: auto; 
-    }
-
-    .footer a {
-      color: #FF6F61;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    .navbar-custom {
-      background-color: #1A1A1A;
-      border-bottom: 3px solid #FF6F61;
-      padding: 1rem 1.5rem;
-      min-height: 80px;
-    }
-
-    .navbar-brand {
-      font-weight: bold;
-      color: #FF6F61 !important;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .navbar-brand .material-symbols-outlined {
-      font-size: 28px;
-    }
-
-    .navbar-nav .nav-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .admin-link {
-      color: #FFF !important;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 0.9rem;
-      padding: 0.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .admin-link:hover {
-      color: #FF6F61 !important;
-    }
-
-    .admin-link .material-symbols-outlined {
-      font-size: 28px;
-      margin-bottom: 0.25rem;
-    }
-
-    .icon-bounce {
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-
-    .navbar-brand:hover .icon-bounce {
-      animation: bounce 0.4s ease;
-    }
-
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      30% { transform: translateY(-8px); }
-      60% { transform: translateY(4px); }
-      100% { transform: translateY(0); }
-    }
-
-    .card {
-      margin-top: 3rem;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      
-    }
-
-    .form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    #heading {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .field {
-      position: relative;
-      margin-bottom: 1.5rem;
-    }
-
-    .input-icon {
-      position: absolute;
-      top: 50%;
-      left: 12px;
-      transform: translateY(-50%);
-      color: #888;
-    }
-
-    .form-control.input-field {
-      padding-left: 36px;
-    }
-
-    .button1 {
-      width: 100%;
-      background-color: #FF6F61;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .button1:hover {
-      background-color: #e75b50;
-    }
-
-    #username-error {
-      margin-top: 0.5rem;
-    }
-
-    .form-control:focus{
-      background: none;
-      box-shadow: none;
-      color: white;
-    }
-    .form-control::placeholder{
-      color: white;
-    }
-
-  </style>
 </head>
 
 <body>
@@ -196,7 +36,6 @@
     </div>
   </nav>
 
-<div class="card p-0">
   <div class="card2">
     <form class="form" id="form" action="/loginadmin" method="post">
       <h5 th:if="${esito != null}" th:text="${esito}" class="text-center text-danger"></h5>
@@ -223,27 +62,9 @@
     </form>
     </div>
 
-    <script>
-      const form = document.getElementById("form");
-      const regex = /^[a-zA-Z0-9._-]{1,50}$/;
-      const errorMsg = document.getElementById("username-error");
-      inputValido = form.elements.id.value ? true : false;
-
-      form.elements.username.addEventListener("input", function () {
-        if (regex.test(this.value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-          errorMsg.style.display = "none";
-        } else {
-          this.style.borderColor = "red";
-          inputValido = false;
-          errorMsg.style.display = "block";
-        }
-      });
-    </script>
+    
 
   </div>
-</div>
 
 <!-- FOOTER -->
   <footer class="footer" style="background-color: #f8f8f8; padding: 20px 0; border-top: 1px solid #ddd; font-size: 14px; color: #333; margin-top: 40px;">
@@ -285,6 +106,25 @@
       <p style="font-size: 12px; margin-top: 5px;">Realizzato da: Giuseppe Passaro, Luca Rosati, Francesco Rosario Zaza, Diego Turturro, Liviu Bogdanel Burbulea, Stefano Graglia</p>
     </div>
   </footer>
+
+  <script>
+      const form = document.getElementById("form");
+      const regex = /^[a-zA-Z0-9._-]{1,50}$/;
+      const errorMsg = document.getElementById("username-error");
+      inputValido = form.elements.id.value ? true : false;
+
+      form.elements.username.addEventListener("input", function () {
+        if (regex.test(this.value)) {
+          this.style.borderColor = "";
+          inputValido = true;
+          errorMsg.style.display = "none";
+        } else {
+          this.style.borderColor = "red";
+          inputValido = false;
+          errorMsg.style.display = "block";
+        }
+      });
+    </script>
 
 </body>
 </html>
