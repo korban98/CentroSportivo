@@ -121,19 +121,23 @@
 
     .specs-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem 2rem;
-      margin-top: 1rem;
+      grid-template-columns: max-content auto;
+      row-gap: 1rem;
+      column-gap: 2rem;
+      justify-content: center; /* Centra l'intera griglia nella pagina */
+      text-align: left;
     }
 
     .specs-grid dt {
       font-weight: bold;
-      color: #007bff;
+      text-align: left;
+      margin-right: 50px;
     }
 
     .specs-grid dd {
       margin: 0;
-      color: #555;
+      text-align: left;
+      margin-left: 50px;
     }
 
     .btn-outline-primary {
@@ -256,7 +260,15 @@
               <dt>Indirizzo</dt>
               <dd th:text="|${evento.indirizzo.nome} - ${evento.indirizzo.cap} ${evento.indirizzo.provincia}|">--</dd>
             </dl>
-            <a th:href="@{/}" class="btn btn-outline-primary">Torna alla Home</a>
+            <div class="row justify-content-center mt-4" style="max-width: 500px; margin: 0 auto;">
+              <div class="col-6">
+                <a th:href="@{/}" class="btn btn-outline-primary w-100">Torna alla Home</a>
+              </div>
+              <div class="col-6">
+                <a th:href="@{#}" class="btn btn-outline-primary w-100">Prenota</a>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
