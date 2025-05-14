@@ -240,29 +240,14 @@
         <div class="card">
           <div class="card-header" th:text="${evento.nome}">Nome Evento</div>
           <div class="card-body">
-            <p class="card-text mb-4">Scopri tutti i dettagli del tuo evento sportivo preferito.</p>
-            <dl class="specs-grid">
-              <dt>Data</dt>
-              <dd th:text="${#temporals.format(evento.ricezione, 'dd-MM-yyyy HH:mm')}">--</dd>
-
-              <dt>Costo</dt>
-              <dd th:text="${#numbers.formatDecimal(evento.costo, 0, 'POINT', 2, 'COMMA') + ' €'}">--</dd>
-
-              <dt>Campo</dt>
-              <dd th:text="${evento.campo}">--</dd>
-
-              <dt>Partecipanti</dt>
-              <dd th:text="${evento.partecipanti}">--</dd>
-
-              <dt>Sport</dt>
-              <dd th:text="${evento.sport.nome}">--</dd>
-
-              <dt>Indirizzo</dt>
-              <dd th:text="|${evento.indirizzo.nome} - ${evento.indirizzo.cap} ${evento.indirizzo.provincia}|">--</dd>
-            </dl>
+            <p class="card-text mb-4" th:text="${evento.descrizione}"></p>
+              <p>L'evento avrà luogo il <b th:text="${#temporals.format(evento.ricezione, 'dd/MM/yyyy')}"></b> alle ore <b th:text="${#temporals.format(evento.ricezione, 'HH:mm')}"></b> in <b th:text="|${evento.indirizzo.nome} - ${evento.indirizzo.cap} ${evento.indirizzo.provincia}|">--</b>.</p>
+              <p>Il prezzo è di <b th:text="${#numbers.formatDecimal(evento.costo, 0, 'POINT', 2, 'COMMA') + ' €'}">--</b> e verrà svolto nel <b th:text="${evento.campo}">--</b>.</p>
+              <p>Il numero di partecipanti è di <b th:text="${evento.partecipanti}">--</b> persone.</p>
+              
             <div class="row justify-content-center mt-4" style="max-width: 500px; margin: 0 auto;">
               <div class="col-6">
-                <a th:href="@{/}" class="btn btn-outline-primary w-100">Torna alla Home</a>
+                <a th:href="@{/home}" class="btn btn-outline-primary w-100">Torna agli eventi</a>
               </div>
               <div class="col-6">
                 <a th:href="@{#}" class="btn btn-outline-primary w-100">Prenota</a>
