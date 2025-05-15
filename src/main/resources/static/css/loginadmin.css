@@ -1,12 +1,10 @@
-/* Body */
 body {
   background-color: #f4f7fa;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   margin: 0;
+  padding-top: 100px;
+  margin-top: 50px;
 }
 
 /* Footer */
@@ -34,6 +32,10 @@ body {
   border-bottom: 3px solid #FF6F61;
   padding: 1rem 1.5rem;
   min-height: 80px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar-brand {
@@ -48,11 +50,6 @@ body {
   font-size: 28px;
 }
 
-.navbar-nav .nav-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .admin-link {
   color: #FFF !important;
@@ -74,21 +71,26 @@ body {
   margin-bottom: 0.25rem;
 }
 
-/* Icon animation */
-.icon-bounce {
-  display: inline-block;
-  transition: transform 0.3s ease;
+.navbar-brand:hover .material-symbols-outlined {
+  animation: jump 0.5s ease-in-out;
 }
 
-.navbar-brand:hover .icon-bounce {
-  animation: bounce 0.4s ease;
-}
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
 
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  30% { transform: translateY(-8px); }
-  60% { transform: translateY(4px); }
-  100% { transform: translateY(0); }
+  30% {
+    transform: translateY(-10px);
+  }
+
+  60% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Card */

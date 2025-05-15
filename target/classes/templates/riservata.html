@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,18 +20,21 @@
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid d-flex justify-content-between align-items-center w-100">
       <a class="navbar-brand fs-4" th:href="@{/}">
-        <span class="material-symbols-outlined icon-bounce">location_on</span> Centro Sportivo </a>
-      <div class="mx-auto">
-        <a class="admin-link nav-link" th:href="@{/home}"><span class="material-symbols-outlined">event</span> Eventi
+        <span class="material-symbols-outlined icon-bounce">sports_soccer</span>
+        Centro Sportivo
+      </a>
+      <div class="d-flex gap-4">
+        <a class="admin-link nav-link" th:href="@{/home}">
+          <span class="material-symbols-outlined">event</span>
+          Eventi
         </a>
-      </div>
-      <div>
         <a class="admin-link nav-link" th:href="@{/riservata/logout}">
           <span class="material-symbols-outlined">logout</span> <span th:text="|Logout ${admin.username}|">Logout</span>
         </a>
       </div>
     </div>
   </nav>
+
   <div class="container-fluid px-5 my-5">
     <!-- Header con titolo della pagina -->
     <div class="row mb-4">
@@ -209,74 +213,77 @@
     </div>
   </footer>
   <script>
-  const form = document.getElementById("form");
-  const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
-  const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
-  const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
-  inputValido = false; form.elements.nome.addEventListener("input", function (){
-    if (this.value === "")
-    { this.style.borderColor = ""; inputValido = false; }
-    else if
-      (regex_nome.test(this.value)){
+    const form = document.getElementById("form");
+    const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
+    const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
+    const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
+    inputValido = false; form.elements.nome.addEventListener("input", function () {
+      if (this.value === "") { this.style.borderColor = ""; inputValido = false; }
+      else if
+        (regex_nome.test(this.value)) {
         this.style.borderColor = "";
         inputValido = true;
       } else {
         this.style.borderColor = "#FF6F61";
         inputValido = false;
       }
-  });
-  form.elements.descrizione.addEventListener("input", function () {
-    if (this.value === "") {
-      this.style.borderColor = "";
-      inputValido = false;
+    });
+    form.elements.descrizione.addEventListener("input", function () {
+      if (this.value === "") {
+        this.style.borderColor = "";
+        inputValido = false;
       } else if (regex_descrizione.test(this.value)) {
         this.style.borderColor = "";
         inputValido = true;
-        } else {
-          this.style.borderColor = "#FF6F61";
-          inputValido = false;
-          }
-  });
-  form.elements.campo.addEventListener("input", function () {
-    if (this.value === "") {
-      this.style.borderColor = "";
-      inputValido = false;
+      } else {
+        this.style.borderColor = "#FF6F61";
+        inputValido = false;
+      }
+    });
+    form.elements.campo.addEventListener("input", function () {
+      if (this.value === "") {
+        this.style.borderColor = "";
+        inputValido = false;
       } else if (regex_campo.test(this.value)) {
         this.style.borderColor = "";
         inputValido = true;
-        } else {
-          this.style.borderColor = "#FF6F61";
-          inputValido = false;
-          }
+      } else {
+        this.style.borderColor = "#FF6F61";
+        inputValido = false;
+      }
     });
     form.elements.costo.addEventListener("input", function () {
       const value = this.value;
       if (value === "") {
         this.style.borderColor = ""; inputValido = false;
-        } else if (/^[1-9]*$/.test(value)) {
-          this.style.borderColor = "";
-          inputValido = true;
-          } else {
-            this.style.borderColor = "#FF6F61";
-            inputValido = false;
-            }
+      } else if (/^[1-9]*$/.test(value)) {
+        this.style.borderColor = "";
+        inputValido = true;
+      } else {
+        this.style.borderColor = "#FF6F61";
+        inputValido = false;
+      }
     });
     form.elements.costo.addEventListener("keypress", function (e) {
-      if (!/[0-9]/.test(e.key)) { e.preventDefault(); } });
-      form.elements.partecipanti.addEventListener("input", function () {
-        const value = this.value;
-        if (value === "") {
-          this.style.borderColor = "";
-          inputValido = false;
-          } else if (/^[1-9]*$/.test(value)) {
-            this.style.borderColor = "";
-            inputValido = true;
-            } else {
-              this.style.borderColor = "#FF6F61";
-              inputValido = false; }
-      });
-      form.elements.partecipanti.addEventListener("keypress", function (e) {
-        if (!/[0-9]/.test(e.key)) { e.preventDefault(); } });
+      if (!/[0-9]/.test(e.key)) { e.preventDefault(); }
+    });
+    form.elements.partecipanti.addEventListener("input", function () {
+      const value = this.value;
+      if (value === "") {
+        this.style.borderColor = "";
+        inputValido = false;
+      } else if (/^[1-9]*$/.test(value)) {
+        this.style.borderColor = "";
+        inputValido = true;
+      } else {
+        this.style.borderColor = "#FF6F61";
+        inputValido = false;
+      }
+    });
+    form.elements.partecipanti.addEventListener("keypress", function (e) {
+      if (!/[0-9]/.test(e.key)) { e.preventDefault(); }
+    });
   </script>
 </body>
+
 </html>
