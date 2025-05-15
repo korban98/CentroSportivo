@@ -92,21 +92,35 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.btn-modifica {
+.btn-modifica,
+.btn-elimina {
   background-color: #1A1A1A;
   border-color: #1A1A1A;
   color: white;
   padding: 0.25rem 1rem;
   font-size: 13px;
-  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  margin: 3px 0;
+  height: 34px;
 }
 
 .btn-elimina {
   background-color: #FF6F61;
   border-color: #FF6F61;
-  color: white;
-  padding: 0.25rem 1rem;
-  font-size: 13px;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btn-icon {
+  font-size: 16px;
+  margin-right: 5px;
 }
 
 .btn-success {

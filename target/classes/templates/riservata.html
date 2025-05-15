@@ -152,15 +152,13 @@
                 th:src="@{${evento.foto == null || evento.foto == '' ? 'images/no_img.png' : evento.foto}}">
             </td>
             <td>
-              <div class="d-grid gap-2">
-                <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-sm btn-modifica">
-                  <span class="material-symbols-outlined"
-                    style="font-size: 16px; vertical-align: text-bottom;">edit</span>
+              <div class="actions-container">
+                <a th:href="@{/riservata(id=${evento.id})}" class="btn btn-modifica">
+                  <span class="material-symbols-outlined btn-icon">edit</span>
                   Modifica
                 </a>
-                <a th:href="@{/riservata/rimuovi(id=${evento.id})}" class="btn btn-sm btn-elimina">
-                  <span class="material-symbols-outlined"
-                    style="font-size: 16px; vertical-align: text-bottom;">delete</span>
+                <a th:href="@{/riservata/rimuovi(id=${evento.id})}" class="btn btn-elimina">
+                  <span class="material-symbols-outlined btn-icon">delete</span>
                   Elimina
                 </a>
               </div>
@@ -215,7 +213,7 @@
   <script>
     const form = document.getElementById("form");
     const regex_nome = /^[a-zA-Z0-9\s-]{1,50}$/;
-    const regex_descrizione = /^[a-zA-Z0-9'\",.;:\s-]{1,255}$/;
+    const regex_descrizione = /^[a-zA-Z0-9'\",.;:\sàèìòùáéíóú!?-]{1,255}$/;
     const regex_campo = /^[a-zA-Z0-9\s-]{1,10}$/;
     inputValido = false; form.elements.nome.addEventListener("input", function () {
       if (this.value === "") { this.style.borderColor = ""; inputValido = false; }
