@@ -37,7 +37,7 @@ public class Evento {
     @Pattern(regexp = "[a-zA-Z0-9\\s-]{1,10}", message = "Caratteri non ammessi in campo")
     private String campo;
 
-    @Pattern(regexp = "[a-zA-Z0-9'\",.;:\\s-]{1,255}", message = "Caratteri non ammessi in descrizione")
+    @Pattern(regexp = "[a-zA-Z0-9'\",.;:\\ssàèìòùáéíóú!?-]{1,255}", message = "Caratteri non ammessi in descrizione")
     private String descrizione;
 
     @Min(1)
